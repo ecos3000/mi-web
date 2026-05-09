@@ -1,30 +1,7 @@
 import { useState, useMemo } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
 import Layout from './components/Layout';
 import Home from './pages/Home';
-import Laboratorio from './pages/Laboratorio';
-import Metodologia from './pages/Metodologia';
-import Recursos from './pages/Recursos';
-import Blog from './pages/Blog';
-
-function AnimatedRoutes({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: (val: boolean) => void }) {
-  const location = useLocation();
-
-  return (
-    <Layout darkMode={darkMode} setDarkMode={setDarkMode}>
-      <AnimatePresence mode="wait">
-        <Routes location={location} {...({ key: location.pathname } as any)}>
-          <Route path="/" element={<Home />} />
-          <Route path="/laboratorio" element={<Laboratorio />} />
-          <Route path="/metodologia" element={<Metodologia />} />
-          <Route path="/recursos" element={<Recursos />} />
-          <Route path="/blog" element={<Blog />} />
-        </Routes>
-      </AnimatePresence>
-    </Layout>
-  );
-}
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -47,11 +24,16 @@ export default function App() {
   }), []);
 
   return (
-    <BrowserRouter>
-      <script type="application/ld+json">
-        {JSON.stringify(seoData)}
-      </script>
-      <AnimatedRoutes darkMode={darkMode} setDarkMode={setDarkMode} />
-    </BrowserRouter>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(seoData) }}
+      />
+      <Layout darkMode={darkMode} setDarkMode={setDarkMode}>
+        <AnimatePresence mode="wait">
+          <Home />
+        </AnimatePresence>
+      </Layout>
+    </>
   );
 }

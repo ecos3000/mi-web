@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { 
   Instagram, 
-  ChevronRight, 
   Cpu, 
   Zap, 
   ShieldCheck,
@@ -13,7 +11,7 @@ import {
 import AnimatedCounter from '../components/AnimatedCounter';
 import PageTransition from '../components/PageTransition';
 
-const ServiceCard = ({ title, description, icon: Icon, delay, link }: any) => {
+const ServiceCard = ({ title, description, icon: Icon }: any) => {
   return (
     <motion.div
       variants={{
@@ -29,12 +27,9 @@ const ServiceCard = ({ title, description, icon: Icon, delay, link }: any) => {
           <Icon size={24} />
         </div>
         <h3 className="text-2xl font-display font-bold mb-4 tracking-tight">{title}</h3>
-        <p className="text-foreground/70 leading-relaxed mb-6">
+        <p className="text-foreground/70 leading-relaxed">
           {description}
         </p>
-        <Link to={link} className="flex items-center text-electric-orange font-medium group/btn">
-          Explorar {title} <ChevronRight className="ml-1 group-hover/btn:translate-x-1 transition-transform" size={18} />
-        </Link>
       </div>
     </motion.div>
   );
@@ -84,12 +79,7 @@ export default function Home() {
             transition={{ delay: 0.6, duration: 0.8 }}
             className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6"
           >
-            <Link to="/laboratorio" className="px-10 py-4 bg-electric-orange text-white rounded-full font-bold uppercase tracking-widest tech-heart-pulse active:scale-95 transition-all text-center">
-              Laboratorio IA
-            </Link>
-            <button className="px-10 py-4 border border-foreground/20 rounded-full font-bold uppercase tracking-widest hover:bg-foreground hover:text-background transition-all">
-              Explorar Portfolio
-            </button>
+            {/* Action buttons removed */}
           </motion.div>
         </div>
 
@@ -139,26 +129,21 @@ export default function Home() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {[
-            { icon: Zap, title: "Visual Engine", description: "Creación de contenido disruptivo (Foto y Video) con IA para marcas que buscan impacto inmediato.", link: "/laboratorio" },
-            { icon: Cpu, title: "AI Web Architecture", description: "Diseño y desarrollo de sitios web inteligentes optimizados para conversión.", link: "/laboratorio" },
-            { icon: ShieldCheck, title: "Strategic Advisory", description: "Consultoría y asesoramiento ético para implementar IA en flujos de trabajo reales.", link: "/metodologia" }
+            { icon: Zap, title: "Visual Engine", description: "Creación de contenido disruptivo (Foto y Video) con IA para marcas que buscan impacto inmediato." },
+            { icon: Cpu, title: "AI Web Architecture", description: "Diseño y desarrollo de sitios web inteligentes optimizados para conversión." },
+            { icon: ShieldCheck, title: "Strategic Advisory", description: "Consultoría y asesoramiento ético para implementar IA en flujos de trabajo reales." }
           ].map((service) => (
             <ServiceCard 
               key={service.title}
               icon={service.icon} 
               title={service.title} 
               description={service.description}
-              link={service.link}
-              delay={0}
             />
           ))}
         </motion.div>
 
         <div className="mt-12 text-center">
-            <Link to="/laboratorio" className="inline-flex items-center space-x-2 text-electric-orange font-bold uppercase tracking-widest hover:translate-x-2 transition-transform">
-                <span>EXPLORAR LABORATORIO COMPLETO</span>
-                <ChevronRight size={20} />
-            </Link>
+            {/* Link removed */}
         </div>
       </section>
 
@@ -202,7 +187,7 @@ export default function Home() {
               Diseñamos ecosistemas digitales donde la inteligencia artificial y la experiencia de usuario convergen para crear interfaces que respiran.
             </p>
             
-            <ul className="space-y-8 mb-12">
+            <ul className="space-y-8">
               {[
                 { icon: ShieldCheck, text: "Ética Digital Garantizada" },
                 { icon: MousePointer2, text: "Interfaces Ultra-Reactivas" },
@@ -221,10 +206,6 @@ export default function Home() {
                 </motion.li>
               ))}
             </ul>
-
-            <Link to="/metodologia" className="px-10 py-4 bg-electric-orange/10 border border-electric-orange text-electric-orange rounded-full font-bold uppercase tracking-widest hover:bg-electric-orange hover:text-white transition-all inline-block">
-                VER METODOLOGÍA
-            </Link>
           </motion.div>
         </div>
       </section>
@@ -244,12 +225,7 @@ export default function Home() {
             Únete a los líderes que ya están optimizando su tiempo y presupuesto con IA ética.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-8">
-            <button className="px-16 py-6 bg-electric-orange text-white rounded-full font-bold text-xl uppercase tracking-widest tech-heart-pulse active:scale-95 transition-all shadow-2xl">
-              AGENDAR TRANSFORMACIÓN
-            </button>
-            <Link to="/recursos" className="px-10 py-4 border border-electric-orange text-electric-orange rounded-full font-bold uppercase tracking-widest hover:bg-electric-orange hover:text-white transition-all">
-                OBTENER RECURSOS GRATIS
-            </Link>
+            {/* CTAs removed */}
           </div>
         </motion.div>
       </section>
@@ -263,7 +239,6 @@ export default function Home() {
           </div>
           
           <div className="font-display uppercase tracking-widest font-bold text-foreground flex flex-col items-center">
-            <Link to="/blog" className="text-electric-orange hover:underline mb-4 tracking-[0.2em]">LEER CRÓNICAS</Link>
             <span>&copy; 2026 ADAN_CB90 - FUTURE IS NOW</span>
           </div>
 

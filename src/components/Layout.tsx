@@ -1,17 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
 import { 
   Instagram, 
-  MessageCircle, 
-  Calendar, 
-  Zap, 
-  Globe, 
-  Menu,
-  X,
-  Sun,
-  Moon,
-  Download
+  Globe
 } from 'lucide-react';
 import CustomCursor from './CustomCursor';
 import AnimatedCounter from './AnimatedCounter';
@@ -22,10 +13,7 @@ interface LayoutProps {
   setDarkMode: (val: boolean) => void;
 }
 
-const Layout = ({ children, darkMode, setDarkMode }: LayoutProps) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
-
+const Layout = ({ children, darkMode }: LayoutProps) => {
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -34,16 +22,8 @@ const Layout = ({ children, darkMode, setDarkMode }: LayoutProps) => {
     }
   }, [darkMode]);
 
-  // Scroll to top on route change
-  useEffect(() => {
-    const mainElement = document.querySelector('div.snap-y');
-    if (mainElement) {
-        mainElement.scrollTop = 0;
-    }
-  }, [location.pathname]);
-
   return (
-    <div className={`h-screen overflow-y-auto ${location.pathname === '/' ? 'snap-y snap-mandatory' : ''} transition-colors duration-500 overflow-x-hidden selection:bg-electric-orange selection:text-white`}>
+    <div className="h-screen overflow-y-auto snap-y snap-mandatory transition-colors duration-500 overflow-x-hidden selection:bg-electric-orange selection:text-white">
       <CustomCursor />
       
       {/* Background Video Layer */}
@@ -57,7 +37,7 @@ const Layout = ({ children, darkMode, setDarkMode }: LayoutProps) => {
           className="w-full h-full object-cover opacity-60 relative z-10"
         >
           <source 
-            src="https://ik.imagekit.io/x8axvbbz3/Perpetual_motion_holographic_ele__202605081847.mp4" 
+            src="https://ik.imagekit.io/x8axvbbz3/0508%20(2).mp4" 
             type="video/mp4" 
           />
         </video>
@@ -66,83 +46,14 @@ const Layout = ({ children, darkMode, setDarkMode }: LayoutProps) => {
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center backdrop-blur-sm bg-background/10 border-b border-white/5" aria-label="Main Navigation">
-        <Link 
-          to="/"
-          className="text-2xl font-display font-black tracking-tighter flex items-center"
-        >
+        <div className="text-2xl font-display font-black tracking-tighter flex items-center">
           ADAN<span className="text-electric-orange">_CB90</span>
-        </Link>
-
-        <div className="hidden md:flex space-x-8" role="menubar">
-          {[
-            { name: 'Expertise', path: '/#expertise' },
-            { name: 'Laboratorio', path: '/laboratorio' },
-            { name: 'Metodología', path: '/metodologia' },
-            { name: 'Recursos', path: '/recursos' },
-            { name: 'Blog', path: '/blog' }
-          ].map((item) => (
-            <Link 
-              key={item.name} 
-              to={item.path}
-              className="text-sm font-medium hover:text-electric-orange transition-colors uppercase tracking-widest"
-              role="menuitem"
-            >
-              {item.name}
-            </Link>
-          ))}
         </div>
 
         <div className="flex items-center space-x-4">
-          <button 
-            onClick={() => setDarkMode(!darkMode)}
-            className="p-2 rounded-full hover:bg-white/10 transition-colors"
-            aria-label={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-          >
-            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
-          
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2"
-            aria-expanded={isMenuOpen}
-            aria-label="Toggle Menu"
-            aria-controls="mobile-menu"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Buttons removed per request */}
         </div>
       </nav>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="fixed top-[73px] w-full bg-background/95 backdrop-blur-xl z-50 md:hidden border-b border-white/10"
-          >
-            <div className="flex flex-col p-6 space-y-4">
-              {[
-                { name: 'Expertise', path: '/#expertise' },
-                { name: 'Laboratorio', path: '/laboratorio' },
-                { name: 'Metodología', path: '/metodologia' },
-                { name: 'Recursos', path: '/recursos' },
-                { name: 'Blog', path: '/blog' }
-              ].map((item) => (
-                <Link 
-                  key={item.name} 
-                  to={item.path}
-                  className="text-xl font-display font-bold uppercase"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <main className="relative z-40">
         {children}
@@ -188,53 +99,6 @@ const Layout = ({ children, darkMode, setDarkMode }: LayoutProps) => {
           </div>
         </div>
       </footer>
-
-      {/* Dedicated Lead Magnet Banner (prompted) */}
-      <motion.div 
-        initial={{ x: 100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="fixed right-0 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col items-center bg-electric-orange text-white py-6 px-3 rounded-l-2xl shadow-2xl group overflow-hidden"
-      >
-        <Link to="/recursos" className="flex flex-col items-center space-y-4">
-          <Download className="animate-bounce" size={24} />
-          <span className="[writing-mode:vertical-lr] font-bold uppercase tracking-widest text-xs rotate-180">Descargar Kit de Inicio</span>
-        </Link>
-        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 pointer-events-none" />
-      </motion.div>
-
-      {/* Floating Smart-Contact Button */}
-      <motion.div
-        drag
-        dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
-        initial={{ scale: 0, y: 100 }}
-        animate={{ scale: 1, y: 0 }}
-        transition={{ type: 'spring', bounce: 0.6, delay: 1 }}
-        className="fixed bottom-8 right-8 z-50 group"
-      >
-        <div className="absolute bottom-full right-0 mb-4 flex flex-col items-end space-y-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all pointer-events-none group-hover:pointer-events-auto">
-          <a 
-            href="https://wa.me/34000000000" 
-            target="_blank" 
-            className="px-4 py-2 bg-green-500 text-white rounded-lg flex items-center space-x-2 shadow-lg hover:scale-105 transition-transform"
-          >
-            <MessageCircle size={18} />
-            <span>WhatsApp</span>
-          </a>
-          <a 
-            href="https://calendly.com" 
-            target="_blank" 
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg flex items-center space-x-2 shadow-lg hover:scale-105 transition-transform"
-          >
-            <Calendar size={18} />
-            <span>Calendly</span>
-          </a>
-        </div>
-        
-        <button className="w-16 h-16 bg-electric-orange text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-90 transition-all tech-heart-pulse cursor-none">
-          <Zap size={32} />
-        </button>
-      </motion.div>
     </div>
   );
 };
