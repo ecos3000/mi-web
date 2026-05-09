@@ -12,7 +12,7 @@ export default function App() {
     "name": "adan_cb90 IA Disruptiva",
     "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop",
     "@id": "",
-    "url": window.location.href,
+    "url": typeof window !== 'undefined' ? window.location.origin : "",
     "telephone": "+34000000000",
     "address": {
       "@type": "PostalAddress",
