@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 const PageTransition = ({ children }: { children: ReactNode }) => {
   return (

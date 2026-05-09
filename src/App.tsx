@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { AnimatePresence } from 'motion/react';
 import Layout from './components/Layout';
 import Home from './pages/Home';

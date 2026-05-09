@@ -13,7 +13,7 @@ interface LayoutProps {
   setDarkMode: (val: boolean) => void;
 }
 
-const Layout = ({ children, darkMode }: LayoutProps) => {
+const Layout = ({ children, darkMode, setDarkMode }: LayoutProps) => {
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
